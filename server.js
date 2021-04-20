@@ -16,7 +16,7 @@ const s = new WebSocket.Server({ server });
 //   res.status(200).send(msgMain);
 // });
 
-app.get("/", async function (req, res) {
+app.get("/", function (req, res) {
   res.sendFile(INDEX);
 });
 

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="" />
+  </head>
+  <body>
+    <div>
+      <button onclick="turnOn()">ON</button>
+      <button onclick="turnOff()">OFF</button>
+    </div>
+    <script async defer>
+      var sock = new WebSocket("ws://192.168.1.7:3000");
+      sock.onopen = function (event) {
+        setTimeout(function () {
+          sock.send("connection succeed");
+        });
+      };
+      function turnOn() {
+        sock.send("1");
+      }
+      function turnOff() {
+        sock.send("0");
+      }
+    </script>
+  </body>
+</html>

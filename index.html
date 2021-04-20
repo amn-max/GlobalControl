@@ -14,7 +14,9 @@
       <button type="button" onclick="turnOff()">OFF</button>
     </div>
     <script async defer>
-      var sock = new WebSocket("ws://192.168.1.7:3000");
+      var sock = new WebSocket(
+        "ws:global-control-nodemcu-server.herokuapp.com"
+      );
       sock.onopen = function (event) {
         setTimeout(function () {
           sock.send("connection succeed");

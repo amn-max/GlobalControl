@@ -17,7 +17,7 @@ const s = new WebSocket.Server({ server });
 // });
 
 app.get("/", function (req, res) {
-  res.sendFile(INDEX);
+  res.sendFile(INDEX, { root: __dirname });
 });
 
 s.on("connection", function (ws, req) {

@@ -2,7 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 var http = require("http");
 var path = require("path");
-
+const INDEX = "./index.html";
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -17,7 +17,7 @@ const s = new WebSocket.Server({ server });
 // });
 
 app.get("/", async function (req, res) {
-  res.sendFile(path.join(__dirname + "/index.html"));
+  res.sendFile(INDEX);
 });
 
 s.on("connection", function (ws, req) {

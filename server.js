@@ -6,6 +6,7 @@ const INDEX = "./index.html";
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, "public")));
 const server = http.createServer(app);
 const port = process.env.PORT || 3000;
 const WebSocket = require("ws");

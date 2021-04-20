@@ -34,7 +34,7 @@ s.on("connection", function (ws, req) {
   });
   console.log("new client connected");
 });
-server.listen(3000);
+server.listen(port);
 // app.listen(port, () => {
 //   console.log(`app listening at http://localhost:${port}`);
 // });

@@ -1,7 +1,15 @@
 .con {
   width: 100%;
-  height: 100vh;
-  margin-top: 100px;
+  height: 40vh;
+  margin-top: 60px;
+}
+
+.status {
+  width: 100%;
+  height: 40vh;
+  margin-top: 50px;
+  scroll-behavior: smooth;
+  overflow-y: visible;
 }
 
 .buttons {

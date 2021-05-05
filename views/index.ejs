@@ -32,10 +32,13 @@
       var sock = new WebSocket(
         "ws:global-control-nodemcu-server.herokuapp.com"
       );
+
+      //var sock = new WebSocket("ws://localhost:3000/");
+
       var list_dom = document.getElementById("list_status");
       sock.onopen = function (event) {
         setTimeout(function () {
-          sock.send("connection succeed");
+          sock.send("21");
         });
       };
       sock.onmessage = function (event) {
@@ -53,7 +56,7 @@
         sock.send("1");
       }
       function turnOff() {
-        sock.send("0");
+        sock.send("11");
       }
     </script>
     <script

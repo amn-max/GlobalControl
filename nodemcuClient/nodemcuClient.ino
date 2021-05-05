@@ -7,10 +7,14 @@ const char* password = "air76408";
 char* host = "global-control-nodemcu-server.herokuapp.com";
 const int espport= 80;
 
+//char* host = "192.168.1.7";
+//const int espport= 3000;
+
 WebSocketsClient webSocket;
 WiFiClient client;
 #define USE_SERIAL Serial
 String val="";
+int status = false;
 void webSocketEvent(WStype_t type, uint8_t * payload, size_t length) {
 
   switch(type) {
@@ -19,25 +23,41 @@ void webSocketEvent(WStype_t type, uint8_t * payload, size_t length) {
       break;
     case WStype_CONNECTED: {
       USE_SERIAL.printf("[WSc] Connected to url: %s\n", payload);
-      
+      char* str;
+      str = strtok((char*)payload,":");
       // send message to server when Connected
-      webSocket.sendTXT("Connected to ardunio");
+      
+        if(status == false){
+          webSocket.sendTXT("Connected to ardunio");
+          webSocket.sendTXT("Arduino : Currently OFF");
+        }else{
+          webSocket.sendTXT("Connected to ardunio");
+          webSocket.sendTXT("Arduino : Currently ON");
+        }
     }
       break;
     case WStype_TEXT:
       USE_SERIAL.printf("[WSc] get text: %s\n", payload);
       char* str;
       str = strtok((char*)payload,":");
-      str = strtok(NULL,":");
+//      str = strtok(NULL,":");
       Serial.print("playload is: ");
       Serial.printf(str);
       Serial.print("\n");
       if(atoi(str)==1){
         digitalWrite(12,HIGH);
+        status = true;
         webSocket.sendTXT("Arduino : DigitalWrite to HIGH");
-      }else if(atoi(str)==0){
+      }else if(atoi(str)==11){
         digitalWrite(12,LOW);
+        status = false;
         webSocket.sendTXT("Arduino : DigitalWrite to LOW");
+      }else if(atoi(str)==21){
+        if(status == false){
+          webSocket.sendTXT("Arduino : Currently OFF");
+        }else{
+          webSocket.sendTXT("Arduino : Currently ON");
+        }
       }
 
 
@@ -67,6 +87,7 @@ void setup(){
     USE_SERIAL.begin(115200);
     Serial.begin(115200);
     pinMode(12, OUTPUT);
+    digitalWrite(12,LOW);
     WiFi.begin(ssid, password);
     USE_SERIAL.print("connecting");
     pinMode(D0, OUTPUT);

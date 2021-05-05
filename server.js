@@ -26,7 +26,7 @@ s.on("connection", function (ws, req) {
     console.log("Recevied: " + message);
     s.clients.forEach(function (client) {
       if (client != ws && client.readyState) {
-        client.send("broadcast :" + message);
+        client.send(message);
       }
     });
   });

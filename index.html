@@ -40,8 +40,14 @@
       };
       sock.onmessage = function (event) {
         var li = document.createElement("li");
-        li.appendChild(document.createTextNode(event.data));
+        var str = event.data.substr(11, event.data.length);
+        li.appendChild(
+          document.createTextNode(
+            `[${new window.Date().toDateString()}] ` + str
+          )
+        );
         list_dom.appendChild(li);
+        li.scrollIntoView();
       };
       function turnOn() {
         sock.send("1");

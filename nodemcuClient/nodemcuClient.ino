@@ -28,18 +28,19 @@ void webSocketEvent(WStype_t type, uint8_t * payload, size_t length) {
       USE_SERIAL.printf("[WSc] get text: %s\n", payload);
       char* str;
       str = strtok((char*)payload,":");
-      while(str!=NULL){
-        if(atoi(str)==0){
-          Serial.print("match");
-          digitalWrite(12,HIGH);
-          webSocket.sendTXT("DigitalWrite to HIGH");
-        }else if(atoi(str)==1){
-          digitalWrite(12,LOW);
-          webSocket.sendTXT("DigitalWrite to LOW");
-        }
-        str = strtok(NULL,":");
-        
+      str = strtok(NULL,":");
+      Serial.print("playload is: ");
+      Serial.printf(str);
+      Serial.print("\n");
+      if(atoi(str)==1){
+        digitalWrite(12,HIGH);
+        webSocket.sendTXT("Arduino : DigitalWrite to HIGH");
+      }else if(atoi(str)==0){
+        digitalWrite(12,LOW);
+        webSocket.sendTXT("Arduino : DigitalWrite to LOW");
       }
+
+
       // send message to server
       // webSocket.sendTXT("message here");
       break;

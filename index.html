@@ -26,13 +26,13 @@
       </div>
     </div>
     <div class="status">
-      <ul class="list_status"></ul>
+      <ul id="list_status" class="list_status"></ul>
     </div>
     <script async defer>
       var sock = new WebSocket(
         "ws:global-control-nodemcu-server.herokuapp.com"
       );
-      var list_dom = document.getElementsByClassName("list_status");
+      var list_dom = document.getElementById("list_status");
       sock.onopen = function (event) {
         setTimeout(function () {
           sock.send("connection succeed");
